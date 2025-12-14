@@ -1,4 +1,11 @@
 # dashboard_final_refactor.py
+# =============================
+# STEP 1: ENVIRONMENT DETECTION
+# =============================
+import os
+ENV = os.getenv("APP_ENV", "cloud").lower()
+IS_CLOUD = ENV == "cloud"
+
 import warnings
 warnings.filterwarnings("ignore")
 
@@ -124,6 +131,9 @@ df = df.dropna(subset=["Tgl. Pesanan"])
 # Sidebar UX
 # -----------------------------
 st.sidebar.header("⚙️ Pengaturan Dashboard")
+st.sidebar.markdown("### Environment")
+st.sidebar.write("Mode:", "☁️ Cloud (Safe)" if IS_CLOUD else "💻 Local (Full)")
+
 # Date range
 min_date, max_date = df["Tgl. Pesanan"].min(), df["Tgl. Pesanan"].max()
 date_range = st.sidebar.date_input("Filter Rentang Tanggal", value=(min_date, max_date))
@@ -517,3 +527,4 @@ else:
         st.warning("Transform log1p diterapkan pada data — hasil forecast dalam skala log1p. Untuk interpretasi, gunakan inverse np.expm1.")
 
     st.info("Selesai — Jika ingin memperbaiki akurasi, coba: tambah fitur lag yang lebih banyak, gunakan agregasi mingguan, atau tambahkan holiday features / external regressors.")
+
