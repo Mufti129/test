@@ -13,8 +13,6 @@ Library utama:
 - seaborn
 - scikit-learn
 - statsmodels
-- pmdarima
-
 ---
 
 ## ▶️ Menjalankan Secara Lokal
